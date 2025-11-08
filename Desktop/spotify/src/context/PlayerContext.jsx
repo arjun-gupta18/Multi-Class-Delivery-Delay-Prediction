@@ -7,9 +7,9 @@ import { songsData } from '../assets/assets';
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
-  const audioRef = useRef();
-  const seekBg=useRef();
-  const seekBar=useRef();
+  const audioRef = useRef(null);
+  const seekBg = useRef(null);
+  const seekBar = useRef(null);
 
   const [track,setTrack]=useState(songsData[0]);
   const [playStatus,setPlayStatus]=useState(false);
@@ -22,27 +22,29 @@ const PlayerContextProvider = (props) => {
     minute:0
   }});
 
+  const play = () => {
+    if (audioRef.current) audioRef.current.play();
+    setPlayStatus(true);
+  };
+
+  const pause = () => {
+    if (audioRef.current) audioRef.current.pause();
+    setPlayStatus(false);
+  };
+
   const contextValue = {
     audioRef,
     seekBg,
     seekBar,
     track,
     setTrack,
-    playStatus,setPlayStatus,
-    time,setTime,
+    playStatus,
+    setPlayStatus,
+    time,
+    setTime,
     play,
-    pause
-  }
-
-  const play=()=>{
-    audioRef.current.play();
-    setPlayStatus(true)
-  }
-
-  const pause=()=>{
-    audioRef.current.pause();
-    setPlayStatus(false)
-  }
+    pause,
+  };
 
   return (
     <PlayerContext.Provider value={contextValue}>
