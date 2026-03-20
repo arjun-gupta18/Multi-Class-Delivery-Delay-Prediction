@@ -1,5 +1,3 @@
----
-
 # 🚚 Supply Chain Management: Delivery Delay Prediction
 
 ## 📌 Project Overview
